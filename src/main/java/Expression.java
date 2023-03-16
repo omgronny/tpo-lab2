@@ -10,13 +10,13 @@ public class Expression {
         }
     }
 
-    static double EvalPositive(double x) {
+    static double EvalNegative(double x) {
         double div = (Trigonometry.sec(x) + Trigonometry.sec(x)) / Trigonometry.tan(x);
         double square = (div - Trigonometry.csc(x)) * Trigonometry.sin(x);
         return square * square;
     }
 
-    static double EvalNegative(double x) {
+    static double EvalPositive(double x) {
         double log_3 = Logarithms.log_3(x);
         double log_2 = Logarithms.log_2(x);
         double log_5 = Logarithms.log_5(x);
