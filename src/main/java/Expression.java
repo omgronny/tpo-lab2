@@ -16,14 +16,16 @@ public class Expression {
     }
 
     double EvalNegative(double x) {
-        Trigonometry tg = new Trigonometry();
+        Trigonometry tg = new Trigonometry(new Cosinus());
+
         double div = (tg.sec(x) + tg.sec(x)) / tg.tan(x);
         double square = (div - tg.csc(x)) * tg.sin(x);
         return square * square;
     }
 
     double EvalPositive(double x) {
-        Logarithms lg = new Logarithms();
+        Logarithms lg = new Logarithms(new NaturalLogarithm());
+
         double log_3 = lg.log_3(x);
         double log_2 = lg.log_2(x);
         double log_5 = lg.log_5(x);
