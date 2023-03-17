@@ -63,23 +63,6 @@ class ExpressionTest {
     }
 
     @Test
-    void simple() {
-
-        final double value = 1.0;
-
-        final double expected = 1.0;
-        final double real = expression.eval(value);
-
-        final double inf = Math.pow(10, 10);
-
-        assertTrue(expected > inf && real > inf ||
-                        expected < -inf && real < -inf ||
-                        Math.abs(expected - real) < 1E-2,
-                value + ": expected = " + expected + " but real = " + real);
-
-    }
-
-    @Test
     void all() {
 
         for (double value = 0.1; value <= 2.0; value += 0.1) {
