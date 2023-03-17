@@ -12,10 +12,14 @@ repositories {
 }
 
 dependencies {
+
     implementation 'org.jetbrains:annotations:20.1.0'
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.1'
     testImplementation 'org.projectlombok:lombok:1.18.22'
+    testImplementation 'org.mockito:mockito-core:3.+'
+
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     implementation 'org.apache.commons:commons-math3:3.6.1'
 
@@ -23,6 +27,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.26'
     testCompileOnly 'org.projectlombok:lombok:1.18.26'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.26'
+
 }
 
 test {
