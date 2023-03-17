@@ -1,14 +1,31 @@
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
+
+class MathExtension {
+    public static double sec(final double x) {
+        if (Math.abs(Math.cos(x)) < 1E-3) {
+            return Double.POSITIVE_INFINITY;
+        }
+
+        return 1 / Math.cos(x);
+    }
+    public static double csc(final double x) {
+        if (Math.abs(Math.sin(x)) < 1E-3) {
+            return Double.POSITIVE_INFINITY;
+        }
+
+        return 1 / Math.sin(x);
+    }
+}
 
 public class TrigonometryTest {
 
     @BeforeAll
     void cosInit() {
-
         cosinus = mock(Cosinus.class);
 
         when(cosinus.cos(0)).thenReturn(1.0);
@@ -28,10 +45,27 @@ public class TrigonometryTest {
     }
 
     @Test
-    void simple() {
-        assertEquals(0, tg.sin(0));
-        assertEquals(1.0 / 2, tg.sin(Math.PI / 6));
-        assertEquals(Math.sqrt(3) / 2, tg.sin(Math.PI / 3));
+    @ValueSource(doubles = {0, Math.PI / 6, Math.PI / 4, Math.PI / 3, Math.PI / 2, Math.PI, 3 * Math.PI / 2, 2 * Math.PI})
+    void sinusTest(final double value) {
+        assertEquals(Math.sin(value), tg.sin(value));
+    }
+
+    @Test
+    @ValueSource(doubles = {0, Math.PI / 6, Math.PI / 4, Math.PI / 3, Math.PI / 2, Math.PI, 3 * Math.PI / 2, 2 * Math.PI})
+    void tanTest(final double value) {
+        assertEquals(Math.tan(value), tg.tan(value));
+    }
+
+    @Test
+    @ValueSource(doubles = {0, Math.PI / 6, Math.PI / 4, Math.PI / 3, Math.PI / 2, Math.PI, 3 * Math.PI / 2, 2 * Math.PI})
+    void secTest(final double value) {
+        assertEquals(MathExtension.sec(value), tg.sec(value));
+    }
+
+    @Test
+    @ValueSource(doubles = {0, Math.PI / 6, Math.PI / 4, Math.PI / 3, Math.PI / 2, Math.PI, 3 * Math.PI / 2, 2 * Math.PI})
+    void cscTest(final double value) {
+        assertEquals(MathExtension.csc(value), tg.csc(value));
     }
 
     private Trigonometry tg;
