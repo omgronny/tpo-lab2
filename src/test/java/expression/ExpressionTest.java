@@ -79,7 +79,7 @@ class ExpressionTest {
     @Test
     void allPositive() {
 
-        for (double value = 0.1; value <= 2.0; value += 0.1) {
+        for (double value = 0.01; value <= 2.0; value += 0.1) {
 
             if (value >= 0.99 && value <= 1.001) {
                 continue;

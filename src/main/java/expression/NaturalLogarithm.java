@@ -22,7 +22,7 @@ public class NaturalLogarithm {
         double currentAccuracy = computeCurrentAccuracy(x, 0);
 
         int i = 1;
-        while (currentAccuracy > accuracy) {
+        while (currentAccuracy > accuracy / 10) {
             result += computeLnTaylorSeriesMember(x, i);
             currentAccuracy = computeCurrentAccuracy(x, i);
             i++;
@@ -32,7 +32,7 @@ public class NaturalLogarithm {
     }
 
     private double computeCurrentAccuracy(final double x, final int n) {
-        return Math.abs(Math.pow(x, n + 1) / (n + 1) - Math.pow(x, n + 2) / (n + 2));
+        return Math.abs(Math.pow(x, n + 2) / (n + 2));
     }
 
     private double computeLnTaylorSeriesMember(final double x, final int n) {

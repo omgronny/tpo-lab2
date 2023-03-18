@@ -5,17 +5,17 @@ public class Expression {
     private final Logarithms lg;
     private final Trigonometry tg;
 
-<span class="fc" id="L8">    public Expression(final Logarithms lg, final Trigonometry tg) {</span>
-<span class="fc" id="L9">        this.lg = lg;</span>
-<span class="fc" id="L10">        this.tg = tg;</span>
-<span class="fc" id="L11">    }</span>
+<span class="nc" id="L8">    public Expression(final Logarithms lg, final Trigonometry tg) {</span>
+<span class="nc" id="L9">        this.lg = lg;</span>
+<span class="nc" id="L10">        this.tg = tg;</span>
+<span class="nc" id="L11">    }</span>
 
     public double eval(final double x) {
-<span class="pc bpc" id="L14" title="1 of 2 branches missed.">        if (x &gt; 0) {</span>
+<span class="nc bnc" id="L14" title="All 2 branches missed.">        if (x &gt; 0) {</span>
             // any x in (0; +inf)
             // x -&gt; +inf =&gt; f(x) -&gt; +inf
             // x -&gt; 0 =&gt; f(x) -&gt; -inf
-<span class="fc" id="L18">            return evalPositive(x);</span>
+<span class="nc" id="L18">            return evalPositive(x);</span>
         } else {
             // any x in (-inf; 0]
             // f(x) = 1
@@ -33,16 +33,16 @@ public class Expression {
 
     private double evalPositive(final double x) {
 
-<span class="fc" id="L36">        final double log3 = lg.log3(x);</span>
-<span class="fc" id="L37">        final double log2 = lg.log2(x);</span>
-<span class="fc" id="L38">        final double log5 = lg.log5(x);</span>
-<span class="fc" id="L39">        final double log10 = lg.log10(x);</span>
+<span class="nc" id="L36">        final double log3 = lg.log3(x);</span>
+<span class="nc" id="L37">        final double log2 = lg.log2(x);</span>
+<span class="nc" id="L38">        final double log5 = lg.log5(x);</span>
+<span class="nc" id="L39">        final double log10 = lg.log10(x);</span>
 
-<span class="fc" id="L41">        final double numerator = Math.pow(Math.pow(log3, 3) + log2, 3) / log5;</span>
-<span class="fc" id="L42">        final double denominator = log3 * log5 + (log5 + log3) / Math.pow(log10, 2);</span>
+<span class="nc" id="L41">        final double numerator = Math.pow(Math.pow(log3, 3) + log2, 3) / log5;</span>
+<span class="nc" id="L42">        final double denominator = log3 * log5 + (log5 + log3) / Math.pow(log10, 2);</span>
 
-<span class="pc bpc" id="L44" title="2 of 4 branches missed.">        if (Math.abs(numerator) == Double.POSITIVE_INFINITY &amp;&amp; Math.abs(denominator) == Double.POSITIVE_INFINITY) {</span>
-<span class="fc" id="L45">            return 1;</span>
+<span class="nc bnc" id="L44" title="All 4 branches missed.">        if (Math.abs(numerator) == Double.POSITIVE_INFINITY &amp;&amp; Math.abs(denominator) == Double.POSITIVE_INFINITY) {</span>
+<span class="nc" id="L45">            return 1;</span>
         }
 
 <span class="nc" id="L48">        return numerator / denominator;</span>

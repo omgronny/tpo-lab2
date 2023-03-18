@@ -4,10 +4,10 @@ public class Logarithms {
 
     private final NaturalLogarithm naturalLogarithm;
 
-    private final double LN_2 = Math.log(2);
-    private final double LN_3 = Math.log(3);
-    private final double LN_5 = Math.log(5);
-    private final double LN_10 = Math.log(10);
+    private final double ln2 = Math.log(2);
+    private final double ln3 = Math.log(3);
+    private final double ln5 = Math.log(5);
+    private final double ln10 = Math.log(10);
 
     public Logarithms(final NaturalLogarithm naturalLogarithm) {
         this.naturalLogarithm = naturalLogarithm;
@@ -25,19 +25,19 @@ public class Logarithms {
     }
 
     public double log2(final double x) {
-        return log(LN_2, x);
+        return log(ln2, x);
     }
 
     public double log3(final double x) {
-        return log(LN_3, x);
+        return log(ln3, x);
     }
 
     public double log5(final double x) {
-        return log(LN_5, x);
+        return log(ln5, x);
     }
 
     public double log10(final double x) {
-        return log(LN_10, x);
+        return log(ln10, x);
     }
 
 }
