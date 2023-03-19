@@ -47,7 +47,7 @@ class CosinusTest {
     @ParameterizedTest
     @ValueSource(doubles = {0, Math.PI / 6, Math.PI / 4, Math.PI / 3, Math.PI / 2, Math.PI, 3 * Math.PI / 2, 2 * Math.PI})
     @DisplayName("Check basic trigonometric table values")
-    void secantBasicCheck(final double value) {
+    void cosBasicCheck(final double value) {
         Assertions.assertEquals(Math.cos(value), cosinus.cos(value), EPS);
     }
 

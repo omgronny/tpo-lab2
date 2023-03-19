@@ -12,7 +12,7 @@ public class Cosinus {
             return 0.0;
         }
 
-        return computedCos;
+        return Math.min(Math.max(computedCos, -1), 1);
     }
 
     private double calculateCos(final double bigX, final double accuracy) {
