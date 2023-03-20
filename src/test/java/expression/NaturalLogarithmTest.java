@@ -7,13 +7,13 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class NaturalLogarithmTest {
+class NaturalLogarithmTest {
     private static final double DELTA = 0.05;
 
     private final NaturalLogarithm ln = new NaturalLogarithm();
 
     @ParameterizedTest
-    @CsvSource(value = {
+    @CsvSource({
             "-0.6470295833786549, 1, 6",
             "-0.2415644752704905, 1, 4",
             "0.046117597181290375, 1, 3",
@@ -31,21 +31,21 @@ public class NaturalLogarithmTest {
             "0.4515827052894548, 1, 2",
             "2.243342174517509, 3, 1"
     })
-    public void tableValuesTest(double expected, double num, double den) {
-        double x = num * Math.PI / den;
+    void tableValuesTest(final double expected, final double num, final double den) {
+        final double x = num * Math.PI / den;
         if (x < 2) {
-            double actual = ln.ln(x);
+            final double actual = ln.ln(x);
             Assertions.assertEquals(expected, actual, DELTA);
         } else {
-            IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> ln.ln(x));
+            final IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> ln.ln(x));
             Assertions.assertTrue(exception.getMessage().contains("x must be less than 2"));
         }
     }
 
     @Test
-    public void nanStubsTest() {
-        double expected = Double.NaN;
-        double actual = ln.ln(Double.NaN);
+    void nanStubsTest() {
+        final double expected = Double.NaN;
+        final double actual = ln.ln(Double.NaN);
         Assertions.assertEquals(expected, actual, DELTA);
     }
 }

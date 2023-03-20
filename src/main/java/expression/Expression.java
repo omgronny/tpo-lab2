@@ -51,20 +51,19 @@ public class Expression {
         return numerator / denominator;
     }
 
-    public void saveToCsv(String filePath, double start, double limit, double step){
-        try(FileWriter writer = new FileWriter(filePath, false)) {
+    public void saveToCsv(final String filePath, final double start, final double limit, final double step) throws IOException {
+        try (FileWriter writer = new FileWriter(filePath, false)) {
             writer.write(toCsv(start, limit, step));
             writer.flush();
-        } catch(IOException ex){
-            System.out.println(ex.getMessage());
         }
     }
 
-    public String toCsv(double start, double limit, double step){
-        StringBuilder result = new StringBuilder();
-        while (start <= limit){
-            result.append(start).append(", ").append(eval(start)).append("\n");
-            start += step;
+    public String toCsv(final double start, final double limit, final double step) {
+        double x = start;
+        final StringBuilder result = new StringBuilder();
+        while (x <= limit) {
+            result.append(x).append(", ").append(eval(x)).append("\n");
+            x += step;
         }
         return result.toString();
     }
