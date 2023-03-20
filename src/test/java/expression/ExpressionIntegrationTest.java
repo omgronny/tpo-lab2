@@ -33,30 +33,6 @@ class ExpressionIntegrationTest {
 
     }
 
-//    @Test
-//    void allPositive() {
-//
-//        for (double value = 0.01; value <= 2.0; value += 0.1) {
-//
-//            if (value >= 0.99 && value <= 1.001) {
-//                continue;
-//            }
-//
-//            final double expected = 1.0; // TODO посчитать значение
-//            final double real = expression.eval(value);
-//
-//            final double inf = Math.pow(10, 10);
-//
-//            assertTrue(expected > inf && real > inf ||
-//                            expected < -inf && real < -inf ||
-//                            Math.abs(expected - real) < 1E-2,
-//                    value + ": expected = " + expected + " but real = " + real);
-//
-//        }
-//
-//    }
-//    // TODO: анализ эквивалентности + тесты для реальных логарифмов
-
     @ParameterizedTest
     @ValueSource(doubles = {-5 * Math.PI / 6, -2 * Math.PI / 3, -3 * Math.PI / 4, -Math.PI / 6, -Math.PI / 4, -Math.PI / 3})
     void negativeGoodValues(final double value) {
