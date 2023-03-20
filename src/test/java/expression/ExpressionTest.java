@@ -12,6 +12,7 @@ class ExpressionTest {
 
     static final double EPS = 0.1;
     Trigonometry tg;
+    Logarithms log;
     Expression expression;
 
     @BeforeEach
@@ -58,7 +59,8 @@ class ExpressionTest {
             when(tg.csc(-2 * Math.PI)).thenReturn(MathExtension.csc(-2 * Math.PI));
         }
 
-        expression = new Expression(new Logarithms(new NaturalLogarithm()), tg);
+        log = LogMocks.getLogMock();
+        expression = new Expression(log, tg);
     }
 
     @ParameterizedTest
@@ -80,8 +82,6 @@ class ExpressionTest {
     @ParameterizedTest
     @ValueSource(doubles = {Math.PI / 6,  Math.PI / 4, Math.PI / 3, Math.PI / 2})
     void tablePositive(final double value) {
-        final Logarithms log = LogMocks.getLogMock();
-
 
             final double expected = Math.pow(Math.pow(log.log3(value), 3) + log.log2(value), 3) / log.log5(value)
                     / (log.log3(value) * log.log5(value) +
