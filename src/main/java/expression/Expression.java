@@ -1,5 +1,8 @@
 package expression;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Expression {
 
     private final Logarithms lg;
@@ -48,4 +51,21 @@ public class Expression {
         return numerator / denominator;
     }
 
+    public void saveToCsv(String filePath, double start, double limit, double step){
+        try(FileWriter writer = new FileWriter(filePath, false)) {
+            writer.write(toCsv(start, limit, step));
+            writer.flush();
+        } catch(IOException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public String toCsv(double start, double limit, double step){
+        StringBuilder result = new StringBuilder();
+        while (start <= limit){
+            result.append(start).append(", ").append(eval(start)).append("\n");
+            start += step;
+        }
+        return result.toString();
+    }
 }

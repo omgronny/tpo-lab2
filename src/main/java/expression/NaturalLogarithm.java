@@ -1,8 +1,14 @@
 package expression;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class NaturalLogarithm {
 
     public double ln(final double x) {
+        if (x > 2) {
+            throw new IllegalArgumentException("x must be less than 2");
+        }
 
         final double accuracy = 1E-3;
         final double computedCos = calculateLn(x, accuracy);
@@ -41,5 +47,23 @@ public class NaturalLogarithm {
         }
 
         return Math.pow(-1, n) * Math.pow(x, n + 1) / (n + 1);
+    }
+
+    public void saveToCsv(String filePath, double start, double limit, double step){
+        try(FileWriter writer = new FileWriter(filePath, false)) {
+            writer.write(toCsv(start, limit, step));
+            writer.flush();
+        } catch(IOException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public String toCsv(double start, double limit, double step){
+        StringBuilder result = new StringBuilder();
+        while (start <= limit){
+            result.append(start).append(", ").append(ln(start)).append("\n");
+            start += step;
+        }
+        return result.toString();
     }
 }

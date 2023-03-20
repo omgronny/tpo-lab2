@@ -2,6 +2,9 @@ package expression;
 
 import org.apache.commons.math3.util.CombinatoricsUtils;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Cosinus {
 
     public double cos(final double x) {
@@ -43,4 +46,21 @@ public class Cosinus {
         return Math.pow(-1, n) * Math.pow(x, 2 * n) / CombinatoricsUtils.factorial(2 * n);
     }
 
+    public void saveToCsv(String filePath, double start, double limit, double step){
+        try(FileWriter writer = new FileWriter(filePath, false)) {
+            writer.write(toCsv(start, limit, step));
+            writer.flush();
+        } catch(IOException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public String toCsv(double start, double limit, double step){
+        StringBuilder result = new StringBuilder();
+        while (start <= limit){
+            result.append(start).append(", ").append(cos(start)).append("\n");
+            start += step;
+        }
+        return result.toString();
+    }
 }

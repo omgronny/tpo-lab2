@@ -1,4 +1,4 @@
-package expression;
+package expression.extensions;
 
 public class MathExtension {
     public static double sec(final double x) {

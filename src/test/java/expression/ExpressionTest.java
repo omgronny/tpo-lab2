@@ -1,7 +1,7 @@
 package expression;
 
+import expression.extensions.MathExtension;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -77,16 +77,15 @@ class ExpressionTest {
 
     }
 
-    @Test
-    void allPositive() {
+    @ParameterizedTest
+    @ValueSource(doubles = {Math.PI / 6,  Math.PI / 4, Math.PI / 3, Math.PI / 2})
+    void tablePositive(final double value) {
+        Logarithms log = LogMocks.getLogMock();
 
-        for (double value = 0.01; value <= 2.0; value += 0.1) {
 
-            if (value >= 0.99 && value <= 1.001) {
-                continue;
-            }
-
-            final double expected = 1.0; // TODO посчитать значение
+            final double expected = (Math.pow((Math.pow(log.log3(value), 3) + log.log2(value)), 3) / log.log5(value))
+                    / (log.log3(value) * log.log5(value) +
+                    (log.log3(value) + log.log5(value)) / Math.pow(log.log10(value), 2));
             final double real = expression.eval(value);
 
             final double inf = Math.pow(10, 10);
@@ -96,10 +95,8 @@ class ExpressionTest {
                             Math.abs(expected - real) < 1E-2,
                     value + ": expected = " + expected + " but real = " + real);
 
-        }
 
     }
-    // TODO: анализ эквивалентности + тесты для реальных логарифмов
 
     @ParameterizedTest
     @ValueSource(doubles = {-5 * Math.PI / 6, -2 * Math.PI / 3, -3 * Math.PI / 4, -Math.PI / 6, -Math.PI / 4, -Math.PI / 3})
