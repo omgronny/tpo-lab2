@@ -48,9 +48,11 @@ jacocoTestReport {
     reports {
         html.enabled true
     }
+    excludedClassFilesForReport(classDirectories)
 }
 jacocoTestCoverageVerification {
     dependsOn test
+    excludedClassFilesForReport(classDirectories)
 
     violationRules {
         rule {
@@ -82,5 +84,13 @@ jacocoTestCoverageVerification {
             }
         }
     }
+}
+
+private excludedClassFilesForReport(classDirectories) {
+    classDirectories.setFrom(files(classDirectories.files.collect {
+        fileTree(dir: "${project.buildDir}/classes/java/main/expression", exclude: [
+                'csv/*.class',
+        ])
+    }))
 }
 check.dependsOn jacocoTestReport, jacocoTestCoverageVerification
