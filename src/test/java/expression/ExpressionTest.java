@@ -80,22 +80,19 @@ class ExpressionTest {
     }
 
     @ParameterizedTest
-    @ValueSource(doubles = {Math.PI / 6,  Math.PI / 4, Math.PI / 3, Math.PI / 2})
+    @ValueSource(doubles = {Math.PI / 6, Math.PI / 4, Math.PI / 3, Math.PI / 2})
     void tablePositive(final double value) {
+        final double expected = Math.pow(Math.pow(log.log3(value), 3) + log.log2(value), 3) / log.log5(value)
+                / (log.log3(value) * log.log5(value) +
+                (log.log3(value) + log.log5(value)) / Math.pow(log.log10(value), 2));
+        final double real = expression.eval(value);
 
-            final double expected = Math.pow(Math.pow(log.log3(value), 3) + log.log2(value), 3) / log.log5(value)
-                    / (log.log3(value) * log.log5(value) +
-                    (log.log3(value) + log.log5(value)) / Math.pow(log.log10(value), 2));
-            final double real = expression.eval(value);
+        final double inf = Math.pow(10, 10);
 
-            final double inf = Math.pow(10, 10);
-
-            assertTrue(expected > inf && real > inf ||
-                            expected < -inf && real < -inf ||
-                            Math.abs(expected - real) < 1E-2,
-                    value + ": expected = " + expected + " but real = " + real);
-
-
+        assertTrue(expected > inf && real > inf ||
+                        expected < -inf && real < -inf ||
+                        Math.abs(expected - real) < 1E-2,
+                value + ": expected = " + expected + " but real = " + real);
     }
 
     @ParameterizedTest
@@ -111,7 +108,7 @@ class ExpressionTest {
     }
 
     @ParameterizedTest
-    @ValueSource(doubles = {0, -Math.PI / 2, -Math.PI, -3 * Math.PI / 2, - 2 * Math.PI})
+    @ValueSource(doubles = {0, -Math.PI / 2, -Math.PI, -3 * Math.PI / 2, -2 * Math.PI})
     void negativeOutOfRange(final double value) {
 
         final Expression realExpression = new Expression(LogMocks.getLogMock(), tg);
