@@ -99,10 +99,9 @@ class ExpressionTest {
     }
 
     @ParameterizedTest
-    @ValueSource(doubles = {-5 * Math.PI / 6, -2 * Math.PI / 3, -3 * Math.PI / 4, -Math.PI / 6, -Math.PI / 4, -Math.PI / 3})
+    @ValueSource(doubles = {-Math.PI / 6, -Math.PI / 4, -Math.PI / 3})
     void negativeGoodValues(final double value) {
-
-        final Expression realExpression = new Expression(new Logarithms(new NaturalLogarithm()), new Trigonometry(new Cosinus()));
+        final Expression realExpression = new Expression(LogMocks.getLogMock(), tg);
 
         final double expected = 1.0;
         final double real = realExpression.eval(value);
@@ -115,11 +114,10 @@ class ExpressionTest {
     @ValueSource(doubles = {0, -Math.PI / 2, -Math.PI, -3 * Math.PI / 2, - 2 * Math.PI})
     void negativeOutOfRange(final double value) {
 
-        final Expression realExpression = new Expression(new Logarithms(new NaturalLogarithm()), new Trigonometry(new Cosinus()));
-
+        final Expression realExpression = new Expression(LogMocks.getLogMock(), tg);
         final double real = realExpression.eval(value);
-
         assertTrue(Double.isNaN(real), value + ": expression is not NaN but should be");
+
     }
 
 

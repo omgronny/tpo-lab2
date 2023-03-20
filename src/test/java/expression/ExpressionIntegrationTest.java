@@ -37,10 +37,8 @@ class ExpressionIntegrationTest {
     @ValueSource(doubles = {-5 * Math.PI / 6, -2 * Math.PI / 3, -3 * Math.PI / 4, -Math.PI / 6, -Math.PI / 4, -Math.PI / 3})
     void negativeGoodValues(final double value) {
 
-        final Expression realExpression = new Expression(new Logarithms(new NaturalLogarithm()), new Trigonometry(new Cosinus()));
-
         final double expected = 1.0;
-        final double real = realExpression.eval(value);
+        final double real = expression.eval(value);
 
         assertEquals(expected, real, EPS,
                 value + ": expected = " + expected + " but real = " + real);
@@ -49,10 +47,7 @@ class ExpressionIntegrationTest {
     @ParameterizedTest
     @ValueSource(doubles = {0, -Math.PI / 2, -Math.PI, -3 * Math.PI / 2, - 2 * Math.PI})
     void negativeOutOfRange(final double value) {
-
-        final Expression realExpression = new Expression(new Logarithms(new NaturalLogarithm()), new Trigonometry(new Cosinus()));
-
-        final double real = realExpression.eval(value);
+        final double real = expression.eval(value);
 
         assertTrue(Double.isNaN(real), value + ": expression is not NaN but should be");
     }
